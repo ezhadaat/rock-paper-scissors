@@ -14,15 +14,31 @@ function getHumanChoice() {
     return (choice.toLowerCase());
 }
 
+function playGame() {
+    
 let humanScore = 0;
 let computerScore = 0;
+
+for (let i = 0; i < 5; i++) {
+    playRound();
+    console.log("Your score: " + humanScore + ". Computer score: " + computerScore)
+}
+
+if (humanScore === computerScore) {
+    console.log("Game tie!");
+    return;
+} else if (humanScore > computerScore) {
+    console.log("You won the game!");
+    return;
+} else {
+    console.log("You lost the game!");
+    return;
+}
 
 function playRound() {
     const humanChoice = getHumanChoice();
     const computerChoice = getComputerChoice();
     
-    console.log(humanChoice);
-    console.log(computerChoice);
     if (humanChoice === computerChoice) {
         console.log("Tie!");
         return;
@@ -56,6 +72,8 @@ function playRound() {
     console.log("You win! scissors beat paper!");
     humanScore++;
     return;
+}
+
 }
 
 // playRound(humanChoice, computerChoice);
