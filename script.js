@@ -13,30 +13,12 @@ function getHumanChoice() {
     let choice = prompt("Rock, paper or scissors?");
     return (choice.toLowerCase());
 }
-
-function playGame() {
     
 let humanScore = 0;
 let computerScore = 0;
 
-for (let i = 0; i < 5; i++) {
-    playRound();
-    console.log("Your score: " + humanScore + ". Computer score: " + computerScore)
-}
-
-if (humanScore === computerScore) {
-    console.log("Game tie!");
-    return;
-} else if (humanScore > computerScore) {
-    console.log("You won the game!");
-    return;
-} else {
-    console.log("You lost the game!");
-    return;
-}
-
-function playRound() {
-    const humanChoice = getHumanChoice();
+function playRound(e) {
+    const humanChoice = e.target.id;
     const computerChoice = getComputerChoice();
     
     if (humanChoice === computerChoice) {
@@ -74,6 +56,9 @@ function playRound() {
     return;
 }
 
-}
+const buttons = document.querySelectorAll("button");
+console.log(buttons); //test
 
-// playRound(humanChoice, computerChoice);
+buttons.forEach(button => {
+    button.addEventListener('click', playRound);
+});
