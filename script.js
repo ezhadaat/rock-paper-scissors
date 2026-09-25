@@ -8,11 +8,6 @@ function getComputerChoice() {
     }
     return "scissors";
 }
-
-function getHumanChoice() {
-    let choice = prompt("Rock, paper or scissors?");
-    return (choice.toLowerCase());
-}
     
 let humanScore = 0;
 let computerScore = 0;
@@ -22,43 +17,60 @@ function playRound(e) {
     const computerChoice = getComputerChoice();
     
     if (humanChoice === computerChoice) {
-        console.log("Tie!");
+        result.textContent = "Tie!";
         return;
     }
     if (humanChoice === "rock") {
         if (computerChoice === "scissors") {
-            console.log("You win! Rock beats scissors!");
-            humanScore++;
+            result.textContent = "You win! Rock beats scissors!";
+            changeScore(1);
             return;
         } else {
-            console.log("You lose! paper beats rock!");
-            computerScore++;
+            result.textContent = "You lose! paper beats rock!";
+            changeScore(0);
             return;
         }
     }
     if (humanChoice === "paper") {
         if (computerChoice === "rock") {
-            console.log("You win! Paper beats rock!");
-            humanScore++;
+            result.textContent = "You win! Paper beats rock!";
+            changeScore(1);
             return;
         }
-        console.log("You lose! Scissors beat paper!");
-        computerScore++;
+        result.textContent = "You lose! Scissors beat paper!";
+        changeScore(0);
         return;
     }
     if (computerChoice === "rock") {
-        console.log("You lose! Rock beats scissors!");
-        computerScore++;
+        result.textContent = "You lose! Rock beats scissors!";
+        changeScore(0);
         return;
     }
-    console.log("You win! scissors beat paper!");
-    humanScore++;
+    result.textContent = "You win! scissors beat paper!";
+    changeScore(1);
     return;
 }
-
+const result = document.querySelector('#result');
 const buttons = document.querySelectorAll("button");
-console.log(buttons); //test
+const scoreCountHuman = document.querySelector('#humanScore');
+const scoreCountComputer = document.querySelector('#computerScore');
 
 buttons.forEach(button => {
     button.addEventListener('click', playRound);
 });
+
+function changeScore(win) {
+    if(win) {
+        scoreCountHuman.textContent = ++humanScore;
+        if (humanScore === 5) {
+            alert("You win!");
+        } else {return}
+    } else {
+        scoreCountComputer.textContent = ++computerScore;
+        if (computerScore === 5) {
+            alert("Computer wins!");
+        } else {return}
+    }
+    scoreCountComputer.textContent = (computerScore = 0);
+    scoreCountHuman.textContent = (humanScore = 0);
+}
